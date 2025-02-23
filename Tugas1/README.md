@@ -1,5 +1,21 @@
 # Review - Workshop Adminsitrasi Jaringan
 
+- [TUGAS 1: Analisa file http.cap](#tugas-1-analisa-file-httpcap)
+  - [Versi HTTP yang digunakan](#versi-http-yang-digunakan)
+  - [IP Address dari client dan server](#ip-address-dari-client-dan-server)
+  - [Waktu dari client mengirimkan HTTP request](#waktu-dari-client-mengirimkan-http-request)
+  - [Waktu dari server menerima HTTP request dari client](#waktu-dari-server-menerima-http-request-dari-client)
+  - [Waktu yang dibutuhkan untuk transfer dan response dari client ke server](#waktu-yang-dibutuhkan-untuk-transfer-dan-response-dari-client-ke-server)
+- [TUGAS 2: Analisa Gambar Types of Data Deliveries](#tugas-2-analisa-gambar-types-of-data-deliveries)
+  - [Node to node](#node-to-node)
+  - [Host to host](#host-to-host)
+  - [Process to process](#process-to-process)
+- [TUGAS 3: Resume Tahapan TCP](#tugas-3-resume-tahapan-tcp)
+  - [Connection Establishment](#connection-establishment)
+  - [Data Transfer](#data-transfer)
+  - [Connection Termination](#connection-termination)
+
+
 ## TUGAS 1: Analisa file http.cap
 
 ### A. Versi HTTP yang digunakan
