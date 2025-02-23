@@ -60,3 +60,37 @@ Pada data delivery host to host, data dikirimkan dari satu perangkat ke perangka
 Pada data delivery process to process, data dikirim antara proses atau aplikasi yang berjalan pada perangkat yang berbeda, delivery process to process beroperasi hingga layer ke 4 OSI Layer, yaitu `Transport Layer`. Process to process delivery menggunakan `nomor port` untuk pengalamatan prosesnya. Contoh dari delivery ini adalah komunikasi antara web browser dan web server.
 
 ## TUGAS 3: Resume Tahapan TCP
+**TCP** (Transmission Control Protocol) adalah protokol komunikasi berbasis koneksi yang memastikan pengiriman data secara andal (reliable). Proses komunikasi dalam TCP terdiri dari 3 tahapan yaitu:
+
+### Connection Establishment
+Sebelum data dapat dikirim, client dan server harus memastikan koneksi terlebih dahulu melalui proses `three-way handshake`. Proses ini memastikan baik client maupun server siap untuk berkomunikasi.
+1. **SYN**
+- Client mengirimkan packet `SYN` ke server untuk menginisiasi koneksi
+3. **SYN-ACK**
+- Server menerima packet `SYN` dari client dan membalasnya dengan packet `SYN-ACK`
+3. **ACK**
+- Client mengirimkan packet `ACK` sebagai konfirmasi penerimaan `SYN-ACK` dari server
+Setelah packet `ACK` diterima oleh server, koneksi dianggap sudah aktif dan siap untuk berkomunikasi
+
+### Data Transfer
+Setelah koneksi terbentuk, client dan server dapat mulai berkomunikasi dan mulai bertukar data. TCP memastikan data dikirim dengan andal melalui beberapa mekanisme:
+- Numbering & Acknowledgement
+- Sliding Window Protocol
+- Retransmission & Timeout
+- Flow Control
+- Congestion Control
+
+### Connection Termination
+Ketika komunikasi selesai, koneksi TCP harus ditutup dengan aman melalui proses `four-way handshake` dengan tahapan berikut:
+1. **FIN**
+- Salah satu pihak (bisa client ataupun server) mengirimkan packet `FIN` untuk meminta penutupan koneksi.
+2. **ACK**
+- Pihak penerima packet FIn akan mengirimkan packet `ACK` untuk mengkonfirmasi permintaan penutupan koneksi, namun disini penerima masih bisa mengirim data yang tersisa sebelum benar-benar ditutup.
+3. **FIN**
+- Setelah semua data selesai dikirim, pihak penerima `FIN` juga akan mengirimkan packet FIN kembali untuk menutup koneksi dari sisinya.
+4. **ACK**
+- Pengirim `FIN` pertama akan mengirimkan packet `ACK` terakhir sebagai konfirmasi untuk menutup koneksi.
+
+Connection termination ini dapat dilakukan dari sisi client maupun server, jika dari sisi client, yang pertama mengirimkan packet `FIN` adalah client dan yang mengirim packet `ACK` terakhir adalah server. Contoh dari connection termination dari client adalah pada koneksi `SSH` saat client ingin mengakhiri sesi.
+
+Sebaliknya jika dari sisi server, yang pertama akan mengirimkan packet `FIN` adalah server dan yang mengirim packet `ACK` terakhir adalah client. Contoh connection termination dari server adalah dalam koneksi `HTTP/1.1` saat setelah beberapa waktu tidak ada aktivitas dari client, server akan menutup koneksi.
