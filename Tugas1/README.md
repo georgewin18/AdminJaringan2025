@@ -43,8 +43,10 @@ Untuk mengetahui waktu yang dibutuhkan dari awal client request hingga server re
 Dapat dilihat bahwa packet `HTTP OK` yang merupakan response dari server ke client request dikirimkan pada waktu `4.8466969` detik dari awal packet capture. Untuk mendapatkan waktu yang dibutuhkan untuk transfer dan response dapat dihitung dari waktu packet `HTTP GET` dikirim hingga packet `HTTP OK` dikirimkan. Maka dapat dihitung sebagai berikut:
 - Waktu packet `HTTP GET` dikirim : `0.911310`
 - Waktu packet `HTTP OK` dikirim : `4.8466969`
-- Selisih : `4.8466969` - `0.911310` = `3,9353869` detik
+- Selisih : `4.8466969` - `0.911310` = `3.935659` detik
 
 ## TUGAS 2: Analisa Gambar Types of Data Deliveries
+![img7](img/7.png)
+
 
 ## TUGAS 3: Resume Tahapan TCP
