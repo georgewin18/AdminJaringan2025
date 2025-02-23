@@ -40,13 +40,23 @@ Untuk mengetahui waktu yang dibutuhkan dari awal client request hingga server re
 
 ![img6](img/6.png)
 
-Dapat dilihat bahwa packet `HTTP OK` yang merupakan response dari server ke client request dikirimkan pada waktu `4.8466969` detik dari awal packet capture. Untuk mendapatkan waktu yang dibutuhkan untuk transfer dan response dapat dihitung dari waktu packet `HTTP GET` dikirim hingga packet `HTTP OK` dikirimkan. Maka dapat dihitung sebagai berikut:
+Dapat dilihat bahwa packet `HTTP OK` yang merupakan response dari server ke client request dikirimkan pada waktu `4.846969` detik dari awal packet capture. Untuk mendapatkan waktu yang dibutuhkan untuk transfer dan response dapat dihitung dari waktu packet `HTTP GET` dikirim hingga packet `HTTP OK` dikirimkan. Maka dapat dihitung sebagai berikut:
 - Waktu packet `HTTP GET` dikirim : `0.911310`
-- Waktu packet `HTTP OK` dikirim : `4.8466969`
-- Selisih : `4.8466969` - `0.911310` = `3.935659` detik
+- Waktu packet `HTTP OK` dikirim : `4.846969`
+- Selisih : `4.846969` - `0.911310` = `3.935659` detik
 
 ## TUGAS 2: Analisa Gambar Types of Data Deliveries
 ![img7](img/7.png)
 
+Pada gambar di atas, terdapat 3 tipe penghantaran data, Node, to node, Host to host, dan Process to process.
+
+### Node to node
+Pada data delivery node to node, data dikirim antara perangkat dalam satu jaringan fisik atau segment jaringan yang sama, delivery node to node beroperasi hanya hingga layer ke 2 OSI Layer, yaitu `Data Link Layer`. Dalam delivery ini, yang digunakan sebagai pengalamatan adalah `MAC Address`. Sebagai contoh di gambar, data delivery antara PC ke Router dan Router ke Router digolongkan sebagai node to node delivery.
+  
+### Host to host
+Pada data delivery host to host, data dikirimkan dari satu perangkat ke perangkat lain di jaringan yang berbeda, delivery host to host beroperasi hingga layer ke 3 OSI Layer, yaitu `Network Layer`. Dalam delivery ini, yang menjadi pengalamatan adalah `IP Address`. Pada gambar di atas, data delivery dari PC ke PC pada jaringan yang berbeda termasuk dalam host to host delivery
+
+### Process to process
+Pada data delivery process to process, data dikirim antara proses atau aplikasi yang berjalan pada perangkat yang berbeda, delivery process to process beroperasi hingga layer ke 4 OSI Layer, yaitu `Transport Layer`. Process to process delivery menggunakan `nomor port` untuk pengalamatan prosesnya. Contoh dari delivery ini adalah komunikasi antara web browser dan web server.
 
 ## TUGAS 3: Resume Tahapan TCP
