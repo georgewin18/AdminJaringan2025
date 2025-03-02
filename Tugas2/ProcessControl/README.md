@@ -66,7 +66,9 @@ Mirip dengan TERM, tetapi jika tidak ditangkap, ia akan menghasilkan core dump. 
 Seperti namanya, perintah kill paling sering digunakan untuk menghentikan proses. kill dapat mengirim signal apapun, tetapi secara default, ia mengirimkan signam TERM. Normal user dapat menggunakan kill untuk menghentikan proses mereka sendiri, sedangkan root user dapat menggunakan kill unutk menghentikan proses manapun.
 
 ### Syntax:
-`kill [-signal] pid`
+```bash
+kill [-signal] pid
+```
 
 - signal adalah nomor atau nama simbolik dari signal yang akan dikirim
 - pid adalah nomor ID dari proses yang menjadi target
@@ -74,10 +76,14 @@ Seperti namanya, perintah kill paling sering digunakan untuk menghentikan proses
 jika kill dijalankan tanpa nomor sinyal, prosees tidak dijamin langsung mati, karena TERM bisa ditangkap, diblock. atau diabaikan (ignored) oleh proses target.
 
 killall menghentikan proses berdasarkan namanya, bukan berdasarkan PID nya. Namun tidak semua sistemn memiliki perintah ini. Contoh:
-`killall firefox-esr`
+```bash
+killall firefox-esr
+```
 
 pkill mirip dengan killall, tetapi menyediakan lebih banyak opsi. Contoh:
-`pkill -u abdoufermat # menghentikal semua proses yang dimiliki user abdoufermat`
+```bash
+pkill -u abdoufermat # menghentikan semua proses yang dimiliki user abdoufermat
+```
 
 # ps: Monitoring Processes
 Perintah ps adalah alat utama bagi administrator sistem untuk memantau proses yang berjalan. Meskipun versi ps berbeda di berbagai sistem, semuanya menyajikan informasi yang serupa.
@@ -85,9 +91,9 @@ Perintah ps adalah alat utama bagi administrator sistem untuk memantau proses ya
 Dengan ps, kita bisa melihat PID, UID, priority, dan control terminal dari proses. Kita juga bisa melihat penggunaan CPU dan memori dari proses dan status dari proses (running, stopped, sleeping, dll.).
 
 Kita bisa menggunakan ps aux untuk memantau seluruh proses.
-- a -> menampilkan proses dari semua pengguna
-- u -> menampilkan informasi detail setiap proses
-- x -> menampilkan proses yang tidak terkait dengan terminal
+- `a` -> menampilkan proses dari semua pengguna
+- `u` -> menampilkan informasi detail setiap proses
+- `x` -> menampilkan proses yang tidak terkait dengan terminal
 
 Perintah ini memberikan gambaran umum tentang semua proses yang berjalan di sistem.
 
@@ -121,16 +127,21 @@ Proses dengan prioritas rendah adalah proses yang tidak terlalu penting. Proses 
 
 perintah nice dignuakan untuk memulai proses dengan nilai niceness tertentu.
 Syntax:
-`nice -n nice_val [command]`
+```bash
+nice -n nice_val [command]
+```
 
 perintah renice digunakan untuk mengubah nilai niceness dari proses yang sedang berjalan
 Syntax:
-`renice -n nice_val -p pid`
+```bash
+renice -n nice_val -p pid
+```
 
 Nilai prioritas digunakan oleh kernel Linux untuk menjadwalkan suatu pekerjaan. Sistem prioritasnya untuk 0 - 99 digunakan untuk proses real-time dan 100 - 139 untuk proses user
 
 Di Linux, nilai prioritas dihitung dengan rumus:
-`priority_value = 20 + nice value`
+
+> priority_value = 20 + nice value
 
 # /proc filesystem
 
@@ -164,7 +175,9 @@ Kita dapat menginvestigasi penyebab runaway process dengan menggunakan strace at
 Cek penggunaan filesystem dengan `df -h` atau dengan `du` untuk menemukan file dan direktori terbesar
 
 Kita bisa juga menggunakan `lsof` untuk melihat file apa saja yang sedang dibuka oleh runaway process:
-`lsof -p pid`
+```bash
+lsof -p pid
+```
 
 # Periodic Processes
 
