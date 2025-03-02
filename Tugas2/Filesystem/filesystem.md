@@ -1,5 +1,7 @@
 # Filesystem
 
+![filesystem-icon](https://miro.medium.com/v2/resize:fit:752/1*quw0WvsLLCxad3WC6fjQ1Q.png)
+
 Tujuan dasar dari filesystem adalah untuk merepresentasikan dan mengorganisasi storage resources dalam sistem.
 
 Filesystem terdiri dari 4 komponen utama:
@@ -57,6 +59,8 @@ Beberapa sistem menyimpan file library bersama (shared libraries) di /lib atau /
 
 Baik /usr maupun /var harus tersedia agar sistem bisa boot hingga mode multiuser.
 
+![pathnames](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/the-filesystem/data/pathnames.png)
+
 ## File Types
 
 Sebagian besar implementasi filesystem mendefinisikan 7 jenis file:
@@ -71,6 +75,8 @@ Sebagian besar implementasi filesystem mendefinisikan 7 jenis file:
 Kita dapat mengetahui jenis suatu file dengan perintah `file`
 
 Atau gunakan ls -ld untuk melihat informasi tentang direktori tanpa menampilkan isinya.
+
+![file-type-encoding](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/the-filesystem/data/file-type-encoding.png)
 
 ### Regular files
 
@@ -126,6 +132,8 @@ Selain 9 permision bits, ada 3 mode bits tambahan yang terutama berpengaruh pada
 
 Superuser dan pemilik file bisa mengubah mode bits menggunakan perintah `chmod`
 
+![file-attributes](https://cdn.storyasset.link/nlFtWFR5rySdmletT0jhDUQ0tXl2/ms-yxhcfoletf.jpg)
+
 ### Permission Bits
 
 Permision bits terdiri dari 3 group, masing masing terdiri dari 3 bit:
@@ -176,6 +184,8 @@ Setiap direktori memiliki minimal 2 hard link: `.` yaitu hard link ke direktori 
 ### chmod: change permissions
 
 Perintah `chmod` digunakan untuk mengubah mode dari sebuah file. Kita dapat menggunakan octal notation atau dengan symobilc notation
+
+![permissions-encoding](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/the-filesystem/data/permissions-encoding.png)
 
 ### chown: change ownership
 
