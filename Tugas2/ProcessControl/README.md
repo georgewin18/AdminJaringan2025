@@ -98,15 +98,25 @@ Kita bisa menggunakan ps aux untuk memantau seluruh proses.
 
 Perintah ini memberikan gambaran umum tentang semua proses yang berjalan di sistem.
 
+![screenshoot1](./img/1.png)
+
 ![process-explanation](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/process-control/data/process-explanation.png)
 
 Set argumen berguna lainnya adalah `lax`. yang akan memberikan lebih banyak informasi teknikal dari proses. lax sedikit lebih cepat dari aux karena tidak perlu mencari nama user dan groups.
 
+![screenshoot2](./img/2.png)
+
 Untuk melihat proses spesifik, kita bisa menggunakan `grep` untuk melakukan filter dari output ps
+
+![screenshoot3](./img/3.png)
 
 kita dapat menemukan PID dari proses menggunakan `pgrep`
 
+![screenshoot4](./img/4.png)
+
 atau `pidof`
+
+![screenshoot5](./img/5.png)
 
 # Interactive monitoring with top
 
@@ -162,6 +172,8 @@ Untuk mengetahui apa yang sedang dilakukan suatu proses, anda dapat menggunakan 
 
 perintah ini berguna untuk debugging atau sekedar memahami cara kerja suatu program
 
+![screenshoot6](./img/6.png)
+
 top mulai dengan memeriksa waktu saat ini. Kemudian membuka dan membaca direktori /proc, serta mengambil informasi dari file /proc/1/stat untuk mendapatkan detail tentang proses init.
 
 # Runaway Processes
@@ -183,6 +195,8 @@ Kita bisa juga menggunakan `lsof` untuk melihat file apa saja yang sedang dibuka
 ```bash
 lsof -p pid
 ```
+
+![screenshoot7](./img/7.png)
 
 # Periodic Processes
 
