@@ -83,7 +83,7 @@ killall firefox-esr
 
 pkill mirip dengan killall, tetapi menyediakan lebih banyak opsi. Contoh:
 ```bash
-pkill -u abdoufermat # menghentikan semua proses yang dimiliki user abdoufermat
+pkill -u lasangna # menghentikan semua proses yang dimiliki user lasangna
 ```
 
 # ps: Monitoring Processes
@@ -102,11 +102,11 @@ Perintah ini memberikan gambaran umum tentang semua proses yang berjalan di sist
 
 Set argumen berguna lainnya adalah `lax`. yang akan memberikan lebih banyak informasi teknikal dari proses. lax sedikit lebih cepat dari aux karena tidak perlu mencari nama user dan groups.
 
-Untuk melihat proses spesifik, kita bisa menggunakan grep untuk melakukan filter dari output ps
+Untuk melihat proses spesifik, kita bisa menggunakan `grep` untuk melakukan filter dari output ps
 
-kita dapat menemukan PID dari proses menggunakan pgrep
+kita dapat menemukan PID dari proses menggunakan `pgrep`
 
-atau pidof
+atau `pidof`
 
 # Interactive monitoring with top
 
