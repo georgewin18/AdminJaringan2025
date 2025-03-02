@@ -33,7 +33,9 @@ Kit amenggunakan istilah "file tree" untuk merujuk pada keseluruhan struktur fil
 Dalam kebanyakan situasi, filesystem terpasang dalam file tree menggunakan perintah mount. Perintah mount akan memetakan suatu direktori dalam file tree, yang disebut mount point, ke root dari filesystem yang baru.
 
 Contoh:
-`mount /dev/sda4 /users`
+```bash
+mount /dev/sda4 /users
+```
 
 Linux memiliki opsi lazy unmount dengan perintah `umount -l` yang akan menghapus filesystem dari hierarki nama, tetapi tidak benar-benar melakukan unmount hingga filesystem tersebut tidak digunakan lagi.
 
@@ -91,7 +93,9 @@ Directories adalah referensi yang menunjuk ke file lain dalam sistem.
 Hard link memungkinkan satu file memiliki beberapa nama. Untuk membuathard link ke file yang ada, kita bisa menggunakan perintah `ln`. Gunakan opsi -i pada ls untuk melhiat jumlah hard link yang dimiliki suatu file
 
 contoh:
-`ln /etc/passwd /tmp/passwd`
+```bash
+ln /etc/passwd /tmp/passwd
+```
 
 ### Character and Block Devices Files
 
@@ -105,8 +109,8 @@ Setiap device file memiliki major dan minor device number:
 
 Contoh:
 Pada sistem Linux, major device number 4 menandakan serial driver.
-- /dev/tty0 -> Major : 4, Minor : 0 (port serial pertama)
-- /dev/tty1 -> Major : 4, Minor : 1 (port serial kedua)
+- `/dev/tty0` -> Major : 4, Minor : 0 (port serial pertama)
+- `/dev/tty1` -> Major : 4, Minor : 1 (port serial kedua)
 
 Dulu, `/dev` adalah direktori biasa, dan perangkat dibuat secara manual dengan `mknod` serta dihapus dengan `rm`. Namun, cara ini menjadi tidak praktis karena banyaknya jenis perangkat baru yang muncul. Sekarang `/dev` biasanya dipasang sebagai filesystem khusus, dimana isinya dikelola otomatis oleh kernel bersama user-level daemon.
 
@@ -156,7 +160,9 @@ Terdapat 2 jenis file eksekusi:
 - Script executable -> harus diinterpretasi oleh program lain seperti shell atau python.
 
 Script biasanya diawali dengan shebang line seperti :
-`#!/usr/bin/perl`
+```bash
+#!/usr/bin/perl\
+```
 
 File eksekusi non-binary yang tidak memiliki shebang akan diasumsikan sebagai script shell (sh script). Jernel mengenali dan menangani shebang secara langsung. Jika interpreter tidak ditentukan dengan benar, kernel akan menolak menjalankan file. Jika kernel gagal, shell akan mencoba mengeksekusi file tersebut sebagai script shell (sh)
 
@@ -200,7 +206,9 @@ perintah `chgrp` digunakan untuk mengubah group dari sebuah file. Sama seperti c
 perintah `umask` menentukan default permission untuk file baru dan direktori yang dibuat. Perintah `umask` merupakan bit mask yang dikurangi dari default permission untuk menentukan perizian sebenarnya.
 
 contoh:
-`umask 022`
+```bash
+umask 022
+```
 
 sebagai contoh, `umask 027` akan mengijinkan `rwx` untuk pemilik, rx ke group, dan pengguna lain tidak mendapatkan izin.
 
@@ -218,9 +226,13 @@ Struktur dari ACE:
 2. Permission mask
 3. Type
 
-Perintah `getfacl` akan menampilkan ACL dari sebuah file dan perintah setfacl menentukan ACL dari sebuah file.
-`getfacl /etc/passwd`
-`setfacl -m u:abdou:rw /etc/passwd`
+Perintah `getfacl` akan menampilkan ACL dari sebuah file dan perintah `setfacl` menentukan ACL dari sebuah file.
+```bash
+getfacl /etc/passwd
+```
+```bash
+setfacl -m u:abdou:rw /etc/passwd
+```
 
 Terdapat 2 jenis ACL: POSIX ACLs dan NFSv4 ACLs. POSIX ACLs meruapakan model tradisional ACL di UNIX/Linux. Sedangkan NFSv4 ACLs adalah model ACL yang lebih baru dan lebih kuat.
 
