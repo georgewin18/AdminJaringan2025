@@ -37,7 +37,7 @@ Untuk membuat proses baru, sebuah proses menyalin dirinya sendiri menggunakan sy
 
 Saat sistemmelakukan boot, kernel secara mandiri membuuat dan menginstall beberapa proses. Yang paling penting di antaranya adalah init atau systemd, yang selalu memiki PID 1. Proses ini menjalankan script startup system, meskipun cara kerjanya sedikit berbeda antara UNIX dan Linux. Semua proses selain yang dibuat oleh kernel adlaah keturunan dari proses primordial ini.
 
-## Signal
+## Signals
 
 Signal adalah ada;aj cara untuk mengirim notifikasi ke sebuah proses. Signal digunakan untuk memberi tahu suatu proses bawha sebuah peristiwa tertentu telah terjadi.
 
@@ -48,6 +48,7 @@ Terdapat sekitar 30 jenis signal yang didefinisikan, dan masing-masing digunakan
 - Dikirim oleh kernel saat suatu proses melakukan pelanggaran, seperti division by zero
 - Dikirim oleh kernel untuk memberi tahu suatu proses tentang kondisi "menarik", seperti kematian child process atau tersedianya data pada I/O channel
 
+![Signals](https://liujunming.top/images/2018/12/71.png)
 
 Signal KILL, INT, TERM, HUP, dam QUIT terdengar seperti memiliki arti yang mirip. tetapi sebenarnya memiliki kegunaan yang berbeda:
 - KILL (SIGKILL)
@@ -96,6 +97,8 @@ Kita bisa menggunakan ps aux untuk memantau seluruh proses.
 - `x` -> menampilkan proses yang tidak terkait dengan terminal
 
 Perintah ini memberikan gambaran umum tentang semua proses yang berjalan di sistem.
+
+![process-explanation](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/process-control/data/process-explanation.png)
 
 Set argumen berguna lainnya adalah `lax`. yang akan memberikan lebih banyak informasi teknikal dari proses. lax sedikit lebih cepat dari aux karena tidak perlu mencari nama user dan groups.
 
@@ -149,7 +152,9 @@ versi Linux dari ps dan top membaca informasi status proses dari direktori /proc
 
 Meskipun namanya /proc, direktori ini tidak hanya berisi informasi tentang proses, tetapi juga statistik sistem yang dihasilkan oleh kernel dan lainnya.
 
-Setiap proses direpresentasikan sebagai sebuah direktori dalam /proc, dengan nama direktori sesuai dengan PID proses tersebut. driektori /proc berisi berbagai file yang menyediakan informasi tentang proses seperti Command Line yang digunakan, environment variables, file descriptor, dan informasi lainnya.
+Setiap proses direpresentasikan sebagai sebuah direktori dalam /proc, dengan nama direktori sesuai dengan PID proses tersebut. direktori /proc berisi berbagai file yang menyediakan informasi tentang proses seperti Command Line yang digunakan, environment variables, file descriptor, dan informasi lainnya.
+
+![process-information](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/process-control/data/process-information.png)
 
 # Strace and Truss
 
@@ -192,6 +197,17 @@ File konfigurasi cron disebut `crontab` (cron table). crontab untuk setiap pengg
 ## format crontab
 
 file crontab memiliki 5 lolom untuk menentukan waktu dan tanggal eksekusi, diikuti oleh perintah yang akan dijalankan.
+
+```bash
+*     *     *     *     *  perintah yang akan dieksekusi
+-     -     -     -     -
+|     |     |     |     |
+|     |     |     |     +----- Hari (0 - 6) (Minggu=0)
+|     |     |     +------- Bulan (1 - 12)
+|     |     +--------- Tanggal (1 - 31)
+|     +----------- Jam (0 - 23)
++------------- Menit (0 - 59)
+```
 
 ## crontab management
 
