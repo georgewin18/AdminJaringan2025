@@ -1,2 +1,2 @@
-- [Chapter4: Process Control](./process-control)
-- [Chapter5: The Filesystem](./the-filesystem)
+- [Chapter4: Process Control](./ProcessControl)
+- [Chapter5: The Filesystem](./Filesystem)
