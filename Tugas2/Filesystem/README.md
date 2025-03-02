@@ -1,4 +1,4 @@
-# Filesystem
+# Chapter 5: Filesystem
 
 ![filesystem-icon](https://miro.medium.com/v2/resize:fit:752/1*quw0WvsLLCxad3WC6fjQ1Q.png)
 
@@ -43,6 +43,8 @@ Jika filesystem sedang sibuk, kita bisa menggunakan opsi forceful unmount dengan
 
 Daripada langsung menggunakan umount -f, lebih baik cari dulu proses mana yang masih menggunakan file system dengan `lsof` atau `fuser` baru menghentikan proses tersebut sebelum melakukan unmount.
 
+![screenshoot1](./img/1.png)
+
 untuk menginvestigasi proses yang menggunakan filesystem, kita bisa juga menggunakan `ps`
 
 ## Oraganization of the file tree
@@ -75,6 +77,8 @@ Sebagian besar implementasi filesystem mendefinisikan 7 jenis file:
 7. Symbolic links
 
 Kita dapat mengetahui jenis suatu file dengan perintah `file`
+
+![screenshoot2](./img/2.png)
 
 Atau gunakan ls -ld untuk melihat informasi tentang direktori tanpa menampilkan isinya.
 
@@ -126,7 +130,9 @@ Sama seperti local domain sockets, Named pipes memungkinkan komunikasi antar-pro
 
 Symbolic links atau soft links adalah referensi ke file lain berdasarkan nama. Soft links lebih fleksibel dibandingkan hard links, bisa menunjuk ke file di filesystem yang berbeda, bisa menunjuk ke direktori, tidak seperti hard links.
 
-Contoh penggunaannya adalah sistem yang memiliki /usr/bin sebagai symbolic link ke /bin untuk menghemat ruang di root filesystem dan memudahkan berbagi software di beberapa host.
+Contoh penggunaannya adalah sistem yang memiliki /bin sebagai symbolic link ke /usr/bin untuk menghemat ruang di root filesystem dan memudahkan berbagi software di beberapa host.
+
+![screenshoot3](./img/3.png)
 
 ## File attributes
 
@@ -193,6 +199,16 @@ Perintah `chmod` digunakan untuk mengubah mode dari sebuah file. Kita dapat meng
 
 ![permissions-encoding](https://github.com/ferryastika/unix-and-linux-sysadmin-notes/blob/main/the-filesystem/data/permissions-encoding.png)
 
+Contoh syntax menmonic `chmod`:
+
+| Specifier  | Arti                                                                                               |
+| ---------- | -------------------------------------------------------------------------------------------------- |
+| u+w        | Menambahkan write permission untuk pemilik file                                                    |
+| ug=rw,o=r  | Memberikan read/wrirte permission ke pemilik dan group, dan read permission untuk pengguna lainnya |
+| a-x        | Menghapus execute permission untuk semua pengguna                                                  |
+| ug=srx, o= | Set setuid, setgid, and sticky bits untuk pemilik and group (r/x)                                  |
+| g=u        | Membuat permission untuk group sama dengan permission untuk pemilik file                           |
+
 ### chown: change ownership
 
 Perintah `chown` digunakan untuk mengubah pemilik dan group dari sebuah file. Opsi -R dapat digunakan pada chown untuk mengubah kepemilikan dari konten sebuah file secara reskursif
@@ -209,6 +225,13 @@ contoh:
 ```bash
 umask 022
 ```
+
+| Octal | Binary | Perms | Octal | Binary | Perms |
+| ----- | ------ | ----- | ----- | ------ | ----- |
+| 0     | 000    | rwx   | 4     | 100    | -wx   |
+| 1     | 001    | rw-   | 5     | 101    | -w-   |
+| 2     | 010    | r-x   | 6     | 110    | --x   |
+| 3     | 011    | r--   | 7     | 111    | ---   |
 
 sebagai contoh, `umask 027` akan mengijinkan `rwx` untuk pemilik, rx ke group, dan pengguna lain tidak mendapatkan izin.
 
@@ -230,6 +253,8 @@ Perintah `getfacl` akan menampilkan ACL dari sebuah file dan perintah `setfacl` 
 ```bash
 getfacl /etc/passwd
 ```
+![screenshoot4](./img/4.png)
+
 ```bash
 setfacl -m u:abdou:rw /etc/passwd
 ```
@@ -246,6 +271,15 @@ Implementasi ACLs bisa dilakukan di berbagai level, misalnya:
 ### POSIX ACLs
 
 POSIX ACLs merupakan ACL tradisional UNIX yang didukung oleh kebanyakan UNIX-like OS seperti Linux, FreeBSD, dan Solaris.
+
+| Format                | Contoh          | Sets permissions untuk          |
+| --------------------- | --------------- | ------------------------------- |
+| user::perms           | user:rw-        | Pemilik file                    |
+| user:username:perms   | user:abdou:rw-  | Pengguna dengan nama username   |
+| group::perms          | group:r-x       | Group file                      |
+| group:groupname:perms | group:users:r-x | Group dengan nama groupname     |
+| mask::perms           | mask::rwx       | Perizinan maksimal              |
+| other::perms          | other::r--      | Pengguna lainnya                |
 
 ### NFSv4 ACLs
 
