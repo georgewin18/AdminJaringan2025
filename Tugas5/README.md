@@ -138,3 +138,33 @@ setelah menambahkan tabel NAT dan rules di atas, untuk menyimpan konfigurasi ter
 sudo iptables-save
 ```
 
+## VM 2 Configurations
+
+Selanjutnya kita akan mengonfigurasi untuk VM 2 sebagai Client
+
+KIta hanya perlu mengonfigurasi IP Static dari VM 2, dengan masuk Ke Wired Settings dan masuk Ke Tab IPv4 dan isikan address yang berada pada satu network dengan IP Address pada interface `enp0s8` pada VM 1 sebelumnya, yaitu `192.168.200.x` sebagai berikut:
+
+Masukkan juga IP Address 192.168.200.1 pada DNS agar kita dapat terhubung dengan DNS pada VM 1
+
+Untuk mengonfigurasi IP pada VM 2 juga bisa dilakukan melalui CLI seperti pada VM 1 jika menggunakan OS tanpa GUI
+
+### ping to VM 1
+
+Disini akan dicoba untuk melakukan ping ke IP addresss dari VM 1 untuk mengecek koneksi antara VM 2 dan VM 1
+
+dan disini sudah ditampilkan bahwa VM 1 dan VM 2 sudah bisa saling berkomunikasi
+
+### check internet
+
+Disini saya mencoba untuk membuka halaman web untuk mengecek apakah VM 2 sudah bisa terhubung dengan internet
+
+dan saya sudah bisa mengakses internet pada VM 1
+
+### check VM 1 DNS
+
+Disini saya mencoba DNS yang sudah dikonfigurasi pada VM 1 sebelumnya pada VM 2 dengan menggunakan `dig` / `nslookup`
+
+dan dapat kita lihat bahwa pada output `dig` sudah menampilkan ANSWER SECTION dan pada output `nslookup` juga sudah menampilkan nameserver dan ip addressnya
+
+
+
