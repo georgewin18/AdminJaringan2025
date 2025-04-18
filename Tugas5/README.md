@@ -132,6 +132,8 @@ Pertama, ubah nilai ip_forward menjadi 1 agar VM 1 dapat meneruskan IP dengan pe
 echo 1 > /proc/sys/net/ipv4/ip_forward
 ```
 
+![img](img/ip_forward.png)
+
 jika file tersebut ditampilkan dengan perintah `cat` dan menampilkan nilai 1, maka ip_forward sudah diaktifkan
 
 Selanjutnya adalah konfigurasi `iptables`, jalankan perintah berikut:
@@ -152,11 +154,15 @@ sudo iptables -A FORWARD -i enp0s3 -o enp0s8 -j ACCEPT
 
 Perintah ini akan menambahkan rules untuk meneruskan ip dari interface `enp0s8` ke `enp0s3` dan sebaliknya agar nantinya VM 2 bisa terhubung ke Internet
 
+![img](img/iptables.png)
+
 setelah menambahkan tabel NAT dan rules di atas, untuk menyimpan konfigurasi tersebut, jalankan perintah berikut:
 
 ```bash
 sudo iptables-save
 ```
+
+![img](img/iptables-save.png)
 
 ## VM 2 Configurations
 
