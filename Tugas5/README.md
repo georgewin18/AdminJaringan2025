@@ -2,6 +2,8 @@
 
 ## Topology
 
+![img](img/topology.png)
+
 Pada topologi di atas, VM 1 bertugas sebagai gateway yang akan menghuubungkan VM 2 ke internet dengan ip forwarding, selain itu pada VM 1 juga akan dikonfigurasi sebagai DNS server untuk nameserver `www.kelompok2.com.`
 
 Dan untuk VM 2 akan berperan sebagai client jaringan di atas
@@ -16,11 +18,15 @@ Pertama, install `bind9` untuk DNS server, dan `iptables` untuk Routing tables d
 sudo apt install bind9 bind9utils
 ```
 
+![img](img/1.png)
+
 disini `bind9utils` nantinya akan digunakan untuk mengecek hasil konfigurasi zones
 
 ```bash
 sudo apt install iptables iptables-persistent
 ```
+
+![img](img/2.png)
 
 untuk `iptables-persistent` diinstall agar rules yang dibuat dapat tersimpan meski VM dimatikan, sehingga tidak perlu mengonfigurasi ulang nantinya
 
@@ -31,6 +37,8 @@ untuk mengonfigurasi ip address pada VM 1, kita bisa mengedit file `/etc/network
 ```bash
 sudo nano /etc/network/interfaces
 ```
+
+![img](img/3.png)
 
 Disini `enp0s3` adalah network interface primary yang kita hubungkan ke bridge adapter / internet, sedangakn untuk `enp0s8` adalah interface secondary yang terhubung ke internal network yang nantinya akan dihubungkan ke VM 2
 
@@ -53,6 +61,8 @@ Pertama, masuk ke direktori `/etc/bind` kemudian kita akan mengonfigurasi bebera
 sudo nano named.conf
 ```
 
+![img](img/4.png)
+
 tambahkan line `include "/etc/bind/named.conf.external-zones"` untuk menambahkan zones yang nantinya akan kita buat
 
 Kemudian konfigurasi file `named.conf.options`
@@ -60,6 +70,8 @@ Kemudian konfigurasi file `named.conf.options`
 ```bash
 sudo nano named.conf.options
 ```
+
+![img](img/5.png)
 
 Tambahkan beberapa line berikut
 
@@ -75,6 +87,8 @@ Selanjutnya adalah file `named.conf.external-zones`
 sudo nano named.conf.external-zones
 ```
 
+![img](img/6.png)
+
 disini kita akan membuat zones untuk DNS kita, kita membuat 2 zones dimana satu untuk nameserver yaitu `kelompok2.com` dan satu lagi untuk IP nya `1.200.168.192.in-addr.arpa`
 pada line `file` berikan lokasi file untuk konfigurasi zone nantinya
 
@@ -84,17 +98,23 @@ Untuk konfigurasi zones, pertama saya akan mengonfigurasi file `kelompok2.com`
 sudo nano kelompok2.com
 ```
 
+![img](img/7.png)
+
 selanjutnya file `1.200.168.192.db`
 
 ```bash
 sudo nano 1.200.168.192.db
 ```
 
+![img](img/8.png)
+
 setelah membuat konfigurasi untuk kedua zones tersebut, kita dapat mengecek apakah ada kesalahan dalam konfigurasi menggunakan perintah `named-checkzone` dari `bind9utils`
 
 ```bash
 named-checkzone [nama_zone] [file_konfigurasi_zone]
 ```
+
+![img](img/9.png)
 
 dan diatas sudah memampilkan `OK` untuk kedua zone yang berarti tidak ada masalah yang ditemukan
 
@@ -144,6 +164,8 @@ Selanjutnya kita akan mengonfigurasi untuk VM 2 sebagai Client
 
 KIta hanya perlu mengonfigurasi IP Static dari VM 2, dengan masuk Ke Wired Settings dan masuk Ke Tab IPv4 dan isikan address yang berada pada satu network dengan IP Address pada interface `enp0s8` pada VM 1 sebelumnya, yaitu `192.168.200.x` sebagai berikut:
 
+![img](img/10.png)
+
 Masukkan juga IP Address 192.168.200.1 pada DNS agar kita dapat terhubung dengan DNS pada VM 1
 
 Untuk mengonfigurasi IP pada VM 2 juga bisa dilakukan melalui CLI seperti pada VM 1 jika menggunakan OS tanpa GUI
@@ -152,17 +174,25 @@ Untuk mengonfigurasi IP pada VM 2 juga bisa dilakukan melalui CLI seperti pada V
 
 Disini akan dicoba untuk melakukan ping ke IP addresss dari VM 1 untuk mengecek koneksi antara VM 2 dan VM 1
 
+![img](img/11.png)
+
 dan disini sudah ditampilkan bahwa VM 1 dan VM 2 sudah bisa saling berkomunikasi
 
 ### check internet
 
 Disini saya mencoba untuk membuka halaman web untuk mengecek apakah VM 2 sudah bisa terhubung dengan internet
 
+![img](img/12.png)
+
 dan saya sudah bisa mengakses internet pada VM 1
 
 ### check VM 1 DNS
 
 Disini saya mencoba DNS yang sudah dikonfigurasi pada VM 1 sebelumnya pada VM 2 dengan menggunakan `dig` / `nslookup`
+
+![img](img/13.png)
+![img](img/14.png)
+![img](img/15.png)
 
 dan dapat kita lihat bahwa pada output `dig` sudah menampilkan ANSWER SECTION dan pada output `nslookup` juga sudah menampilkan nameserver dan ip addressnya
 
