@@ -99,8 +99,18 @@ nslookup -q=MX [nameserver]
 Contoh:
 - google.com
 
+  ![](img/google.png)
+
+  Dari output `nslookup` di atas dapat dilihat bahwa Mail Exchanger dari `google.com` adalah `smtp.google.com`
 
 - pens.ac.id
+
+  ![](img/pens.png)
+
+  Dari output `nslookup` di atas dapat dilihat bahwa `pens.ac.id` memiliki 3 Mail Exchanger, yaitu:
+  - `pmg2.pens.ac.id`
+  - `mail.pens.ac.id`
+  - `pmg.pens.ac.id`
 
 
 ## *Introduction to Electronic Mail*
